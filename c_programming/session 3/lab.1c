@@ -1,0 +1,30 @@
+#include<stdio.h>
+int cylinder_area( int r );
+int cylinder_volum( int r , int h);
+ //calculate volum and area
+
+void main(void){
+
+    int r ,r2 ,h ;
+     printf("plz enter radius ");
+    scanf("%d" , &r);
+    float area =cylinder_area(  r );
+
+     printf("plz enter radius and hight ");
+    scanf("%d %d" , &r2 , &h);
+    float volum =  cylinder_volum(r2 , h);
+
+    printf(" %f %f " ,area , volum);
+
+}
+
+int cylinder_area( int r ){
+    int pi = 3.14 ;
+    int area = pi * (r)*(r) ;
+    return area ;
+}
+int cylinder_volum( int r , int h){
+    int pi = 3.14 ;
+    int volum = pi *(r)*r *h ;
+    return volum;
+}
