@@ -1,0 +1,35 @@
+/*
+ * lab.c
+ *
+ *  Created on: 26 Jul 2026
+ *      Author: LOQ
+ */
+#include "../LIB/STD_TYPES.h"
+#include "../MCAL/DIO/DIO_int.h"
+#include <util/delay.h>
+
+int main(){
+    // Variable to store the pin reading
+    unsigned char pin_value = 0;
+
+    MDIO_vinit();
+    MDIO_vSetPinDir(DIO_PORTA ,DIO_PIN0 ,DIO_OUTPUT);
+    MDIO_vSetPinDir(DIO_PORTA ,DIO_PIN1 ,DIO_INPUT);
+
+    while(1) // Infinite loop to continuously monitor the pin
+    {
+        // 1. Read the actual hardware pin value first
+        pin_value = MDIO_u8GetPinVal(DIO_PORTA, DIO_PIN1);
+
+        // 2. Check the retrieved variable, not the macro
+        if(pin_value == DIO_HIGH){
+            MDIO_vSetPinVal(DIO_PORTA , DIO_PIN0 , DIO_HIGH);
+            _delay_ms(50);
+        }else{
+            MDIO_vSetPinVal(DIO_PORTA , DIO_PIN0 , DIO_LOW);
+        }
+    }
+
+    return 0;
+}
+

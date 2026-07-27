@@ -1,0 +1,115 @@
+/*
+ * DIO_prg.c
+ *
+ *  Created on: 23 Jul 2026
+ *      Author: LOQ
+ */
+
+
+#include "../../LIB/BIT_MATH.h"
+#include "../../LIB/STD_TYPES.h"
+
+#include "DIO_int.h"
+#include "DIO_prv.h"
+
+void MDIO_Init(){
+	PORTA = 0;
+	PORTB = 0;
+	PORTC = 0;
+	PORTD = 0;
+
+	DDRA = 0;
+	DDRB = 0;
+	DDRC = 0;
+	DDRD = 0;
+
+}
+
+void MDIO_vSetPinDir(u8 A_u8PortNo , u8 A_u8PinNo , u8 A_u8PinDir)
+{
+
+	if(A_u8PinDir == DIO_OUTPUT){
+		switch(A_u8PortNo)
+		{
+		case DIO_PORTA:
+			SET_BIT(DDRA ,A_u8PinNo);
+			break;
+		case DIO_PORTB:
+			SET_BIT(DDRB , A_u8PinNo);
+			break;
+		case DIO_PORTC:
+			SET_BIT(DDRC , A_u8PinNo);
+			break;
+		case DIO_PORTD:
+			SET_BIT(DDRD , A_u8PinNo);
+			break;
+		}
+
+	}
+	else if(A_u8PinDir == DIO_INPUT)
+	{
+		switch(A_u8PortNo)
+				{
+		case DIO_PORTA:
+					CLR_BIT(DDRA ,A_u8PinNo);
+					break;
+				case DIO_PORTB:
+					CLR_BIT(DDRB , A_u8PinNo);
+					break;
+				case DIO_PORTC:
+					CLR_BIT(DDRC , A_u8PinNo);
+					break;
+				case DIO_PORTD:
+					CLR_BIT(DDRD , A_u8PinNo);
+					break;
+				}
+
+
+	}
+
+}
+
+void MDIO_vSetPinVal(u8 A_u8PortNo , u8 A_u8PinNo , u8 A_u8PinVal){
+	if(A_u8PinVal == DIO_HIGH){
+			switch(A_u8PortNo)
+			{
+			case DIO_PORTA:
+				SET_BIT(PORTA ,A_u8PinNo);
+				break;
+			case DIO_PORTB:
+				SET_BIT(PORTB , A_u8PinNo);
+				break;
+			case DIO_PORTC:
+				SET_BIT(PORTC , A_u8PinNo);
+				break;
+			case DIO_PORTD:
+				SET_BIT(PORTD , A_u8PinNo);
+				break;
+			}
+
+		}
+		else if(A_u8PinVal == DIO_LOW)
+		{
+			switch(A_u8PortNo)
+					{
+			case DIO_PORTA:
+						CLR_BIT(PORTA ,A_u8PinNo);
+						break;
+					case DIO_PORTB:
+						CLR_BIT(PORTB , A_u8PinNo);
+						break;
+					case DIO_PORTC:
+						CLR_BIT(PORTC , A_u8PinNo);
+						break;
+					case DIO_PORTD:
+						CLR_BIT(PORTD , A_u8PinNo);
+						break;
+					}
+
+
+		}
+
+
+}
+
+

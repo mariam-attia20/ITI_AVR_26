@@ -1,0 +1,23 @@
+/*
+ * LCD_int.h
+ *
+ *  Created on: 26 Jul 2026
+ *      Author: LOQ
+ */
+
+#ifndef HAL_LCD_LCD_INT_H_
+#define HAL_LCD_LCD_INT_H_
+
+
+void HLCD_vInit(void);
+
+void HLCD_vSendChar( u8 A_u8Data[]);
+void HLCD_vSendCmd( u8 A_u8Cmd);
+
+void HLCD_vDisplayString(u8 A_u8Str[]);
+
+void HLCD_vPrintNum(u32 A_u32Number);
+
+void HLCD_vClearScreen(void);
+
+#endif /* HAL_LCD_LCD_INT_H_ */

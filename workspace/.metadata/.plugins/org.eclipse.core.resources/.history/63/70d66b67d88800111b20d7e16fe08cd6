@@ -1,0 +1,13 @@
+/*
+ * LCD_cfg.h
+ *
+ *  Created on: 26 Jul 2026
+ *      Author: LOQ
+ */
+
+#ifndef HAL_LCD_LCD_CFG_H_
+#define HAL_LCD_LCD_CFG_H_
+
+
+
+#endif /* HAL_LCD_LCD_CFG_H_ */

@@ -1,0 +1,23 @@
+/*
+ * DIO_prg.c
+ *
+ *  Created on: 23 Jul 2026
+ *      Author: LOQ
+ */
+
+
+#include "../../LIB/BIT_MATH.h"
+#include "../../LIB/STD_TYPES.h"
+
+void MDIO_Init(){
+};
+
+void MDIO_vSetPinDir(u8 A_u8PortNo , u8 A_u8PinNo , u8 A_u8PinDir){
+	;
+}
+
+void MDIO_vSetPinVal(u8 A_u8PortNo , u8 A_u8PinNo , u8 A_u8PinVal){
+	;
+}
+
+
