@@ -1,0 +1,14 @@
+/*
+ * SPI_cfg.h
+ *
+ *  Created on: 6 Aug 2026
+ *      Author: LOQ
+ */
+
+#ifndef MCAL_SPI_SPI_CFG_H_
+#define MCAL_SPI_SPI_CFG_H_
+
+#define SPI_MASTER 0
+#define SPI_SLAVE  1
+
+#endif /* MCAL_SPI_SPI_CFG_H_ */

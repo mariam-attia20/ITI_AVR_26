@@ -1,0 +1,36 @@
+/*
+ * as_dc_EXTI.c
+ *
+ *  Created on: 30 Jul 2026
+ *      Author: LOQ
+ */
+#include "../LIB/STD_TYPES.h"
+#include "../MCAL/DIO/DIO_int.h"
+#include "../MCAL/EXTI/EXTI_int.h"
+#include "../MCAL/GIE/GIE_int.h"
+
+void dc_motor(){
+	MDIO_vTogPinVal(DIO_PORTA , DIO_PIN0 );
+	MDIO_vTogPinVal(DIO_PORTA , DIO_PIN1 );
+}
+int main(void){
+        // DC motor pin
+	    MDIO_vSetPinDir(DIO_PORTA , DIO_PIN0 , DIO_OUTPUT);
+		MDIO_vSetPinDir(DIO_PORTA , DIO_PIN1 , DIO_OUTPUT);
+	    //bush bottom pin
+		MDIO_vSetPinDir(DIO_PORTD,DIO_PIN2,DIO_INPUT);
+		MDIO_vSetPinVal(DIO_PORTD,DIO_PIN2,DIO_HIGH);
+
+
+		MEXTI_vInit();
+
+		MGIE_vEnableGlobalInterrupt();
+
+		MEXTI_vCallBackFunction(dc_motor, 0);
+		while(1){
+
+		}
+
+	return 0 ;
+}
+

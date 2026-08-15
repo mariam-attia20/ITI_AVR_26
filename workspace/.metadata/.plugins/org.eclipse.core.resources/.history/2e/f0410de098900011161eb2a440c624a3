@@ -1,0 +1,34 @@
+/*
+ * servo_pwm.c
+ *
+ *  Created on: 5 Aug 2026
+ *      Author: LOQ
+ */
+
+#include "../LIB/STD_TYPES.h"
+#include "../LIB/BIT_MATH.h"
+#include "../MCAL/TIMER/TIMER_int.h"
+#include "../MCAL/DIO/DIO_int.h"
+#include "../MCAL/ADC/ADC_int.h"
+
+int main(void)
+{
+	u16 ADC_Val ;
+	u8 OCD_Val;
+
+	MADC_init();
+	MDIO_vInit();
+	MTIMERS_vInit();
+	MDIO_vSetPinDir( DIO_PORTD , DIO_PIN5 , DIO_OUTPUT);
+	MTIMERS_vStartTimer(TIM_1);
+	while(1)
+	{
+		ADC_Val = MADC_u16ReadAnaloge(CHANEL_0) ;
+		OCD_Val = 1000 + ((ADC*1000)/1023); //mapping
+		MTIMERS_vSetCompareMatch(TIM_1 , OCD_Val );
+
+	}
+
+
+	return 0 ;
+}

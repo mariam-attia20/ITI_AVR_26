@@ -27,4 +27,8 @@ typedef unsigned long long int u64;
 typedef float f32;
 typedef double f64;
 
+#ifndef NULLX
+#define NULL  ((void*)0)
+#endif
+
 #endif /* LIB_STD_TYPES_H_ */

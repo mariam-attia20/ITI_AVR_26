@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;Drivers/MCAL/TIMER/TIMER.h&apos; to &apos;TIMER_prv.h&apos;" description="Rename resource &apos;TIMER.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="MCAL/TIMER/TIMER.h" name="TIMER_prv.h" stamp="1785738429180" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;Drivers/MCAL/UART/UART_PRV.h&apos; to &apos;UART_prv.h&apos;" description="Rename resource &apos;UART_PRV.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="MCAL/UART/UART_PRV.h" name="UART_prv.h" stamp="1786002461894" updateReferences="true"/>
+</session>

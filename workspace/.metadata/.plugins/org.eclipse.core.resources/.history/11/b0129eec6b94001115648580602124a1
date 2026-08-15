@@ -1,0 +1,127 @@
+#include "../LIB/STD_TYPES.h"
+#include "../LIB/BIT_MATH.h"
+
+#include "../MCAL/TMR/TMR_int.h"
+
+#include "RTOS_int.h"
+#include "RTOS_prv.h"
+#include "RTOS_cfg.h"
+
+
+
+
+static Task_t G_SysTasks[MAX_NUM_OF_SYS_TASK] = {{0}};
+static u16    G_TaskTiming[MAX_NUM_OF_SYS_TASK] = {0};
+Task_t Empty_struct = {0};
+
+
+static void RTOS_vScheduler(void)
+{
+    for(u8 L_u8counter = 0;L_u8counter< MAX_NUM_OF_SYS_TASK; L_u8counter++)
+    {
+        // check whether there is a task registered or not
+        if(G_SysTasks[L_u8counter].TaskFunction != 0)
+        {
+            if(G_SysTasks[L_u8counter].State == Running)
+            {
+                // if time to run the task
+                if ( G_TaskTiming[L_u8counter]  == 0)
+                {
+                    // call function
+                    G_SysTasks[L_u8counter].TaskFunction();
+
+                    // reload tasktiming with periodicity
+                    G_TaskTiming[L_u8counter] =  G_SysTasks[L_u8counter].Periodicity;
+
+                }else{
+                    G_TaskTiming[L_u8counter]--;
+                }
+            }
+        }
+    }
+}
+
+void RTOS_vStartOS(void)
+{
+    MTIMERS_vInit(); // timer0 , enable interrupt
+    MTIMERS_vSetInterval_CTC(RTOS_vScheduler, 40); // ps = 8, count=40 , ocr = 250. suppose required tick time = 10ms
+     MTIMERS_vSetCompareMatch(TIM_0,250);
+    MTIMERS_vStartTimer(TIM_0);
+
+}
+
+u8 RTOS_u8CreateTask(void (*Fptr)(void), u16 A_u16Periodicity, u8 A_u8Priority, u8 A_u8FirstDelay)
+{
+    u8 L_u8ErrorState = 0;
+
+    // range validation
+    if((A_u8Priority >=0) && (A_u8Priority < MAX_NUM_OF_SYS_TASK))
+    {
+        // if this index is free (no tasks reserved here)
+        if( G_SysTasks[A_u8Priority].TaskFunction == 0)
+        {
+            G_SysTasks[A_u8Priority].TaskFunction =  Fptr;
+            G_SysTasks[A_u8Priority].Periodicity  =  A_u16Periodicity;
+            G_SysTasks[A_u8Priority].State        =  Running;
+
+            G_TaskTiming[A_u8Priority]            =  A_u8FirstDelay;
+        }else{
+            //  reserved task with the same priority
+            L_u8ErrorState = PRIORITY_COLLISION;
+        }
+    }else
+    {
+        L_u8ErrorState = OUT_OF_BOUNDRY;
+    }
+
+    return L_u8ErrorState;
+}
+
+u8 RTOS_DeleteTask(u8 A_u8Priority)
+{
+    u8 L_u8ErrorState = 0;
+
+    // check whether there is a registered task??
+    if(G_SysTasks[A_u8Priority].TaskFunction != 0)
+    {
+        G_SysTasks[A_u8Priority] = Empty_struct;
+    }else
+    {
+        L_u8ErrorState = NO_TASK_EXISTS;
+    }
+
+    return L_u8ErrorState;
+}
+
+
+u8 RTOS_SuspendTask(u8 A_u8Priority)
+{
+    u8 L_u8ErrorState = 0;
+
+    // check whether there is a registered task??
+    if(G_SysTasks[A_u8Priority].TaskFunction != 0)
+    {
+        G_SysTasks[A_u8Priority].State = Suspended;
+    }else
+    {
+        L_u8ErrorState = NO_TASK_EXISTS;
+    }
+
+    return L_u8ErrorState;
+}
+
+u8 RTOS_ResumeTask(u8 A_u8Priority)
+{
+    u8 L_u8ErrorState = 0;
+
+    // check whether there is a registered task??
+    if(G_SysTasks[A_u8Priority].TaskFunction != 0)
+    {
+        G_SysTasks[A_u8Priority].State = Running;
+    }else
+    {
+        L_u8ErrorState = NO_TASK_EXISTS;
+    }
+
+    return L_u8ErrorState;
+}

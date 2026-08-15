@@ -8,8 +8,21 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include RTOS/subdir.mk
+-include MCAL/WDT/subdir.mk
+-include MCAL/UART/subdir.mk
+-include MCAL/TWI/subdir.mk
+-include MCAL/TIMER/subdir.mk
+-include MCAL/SPI/subdir.mk
+-include MCAL/GIE/subdir.mk
+-include MCAL/EXTI/subdir.mk
 -include MCAL/DIO/subdir.mk
+-include MCAL/ADC/subdir.mk
+-include HAL/STEPPER/subdir.mk
+-include HAL/SSD/subdir.mk
 -include HAL/LCD/subdir.mk
+-include HAL/KPD/subdir.mk
+-include FreeRTOS/subdir.mk
 -include APP/subdir.mk
 -include subdir.mk
 -include objects.mk
@@ -49,7 +62,7 @@ all: Drivers.elf secondary-outputs
 Drivers.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: AVR C Linker'
-	avr-gcc -Wl,-Map,Drivers.map -mmcu=atmega16 -o "Drivers.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	avr-gcc -Wl,-Map,Drivers.map -mmcu=atmega32 -o "Drivers.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -67,7 +80,7 @@ Drivers.hex: Drivers.elf
 
 sizedummy: Drivers.elf
 	@echo 'Invoking: Print Size'
-	-avr-size --format=avr --mcu=atmega16 Drivers.elf
+	-avr-size --format=avr --mcu=atmega32 Drivers.elf
 	@echo 'Finished building: $@'
 	@echo ' '
 

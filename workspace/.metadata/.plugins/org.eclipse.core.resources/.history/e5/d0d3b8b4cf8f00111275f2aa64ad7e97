@@ -1,0 +1,21 @@
+/*
+ * TIMERS.c
+ *
+ *  Created on: 3 Aug 2026
+ *      Author: LOQ
+ */
+#include "../LIB/STD_TYPES.h"
+#include "../LIB/BIT_MATH.h"
+#include "../MCAL/TIMER/TIMER_int.h"
+#include "../MCAL/DIO/DIO_int.h"
+int main(void){
+
+	MDIO_vSetPinDir( DIO_PORTA , DIO_PIN0 , DIO_OUTPUT);
+	MTIMER_vInit();
+	MTIMER_vStartTimer(TIM_0);
+
+
+
+
+	return 0 ;
+}

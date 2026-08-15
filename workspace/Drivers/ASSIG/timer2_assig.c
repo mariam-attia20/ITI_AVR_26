@@ -1,0 +1,49 @@
+///*
+// * timer1_assig.c
+// *
+// *  Created on: 15 Aug 2026
+// *      Author: LOQ
+// */
+//#define F_CPU 1000000UL
+//#include <util/delay.h>
+//#include "../LIB/STD_TYPES.h"
+//#include "../MCAL/DIO/DIO_int.h"
+//#include "../MCAL/TIMER/TIMER_int.h"
+//
+//
+//#define SERVO_MIN_TICKS   125
+//#define SERVO_MAX_TICKS   250
+//#define STEP_TICKS        7
+//
+//
+//int main(void)
+//{
+//    u16 L_u16CurrentTicks = SERVO_MIN_TICKS;
+//
+//
+//    MTIMERS_vInit();
+//    MDIO_vSetPinDir(DIO_PORTD, DIO_PIN5, DIO_OUTPUT);
+//
+//
+//    while(1)
+//    {
+//        L_u16CurrentTicks = SERVO_MIN_TICKS;
+//
+//
+//        while (L_u16CurrentTicks < SERVO_MAX_TICKS) {
+//
+//            OCR1A = L_u16CurrentTicks;
+//            _delay_ms(1000);
+//
+//            L_u16CurrentTicks += STEP_TICKS;
+//        }
+//
+//
+//        OCR1A = SERVO_MAX_TICKS;
+//        _delay_ms(1000);
+//
+//
+//        OCR1A = SERVO_MIN_TICKS;
+//        _delay_ms(1000);
+//    }
+//}

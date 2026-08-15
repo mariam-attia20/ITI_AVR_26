@@ -1,0 +1,31 @@
+#include "../LIB/STD_TYPES.h"
+#include "../MCAL/DIO/DIO_int.h"
+#include <util/delay.h>
+#include "../MCAL/ADC/ADC_int.h"
+
+
+int main(void) {
+    u16 L_u16LdrVal = 0;
+
+    void MADC_init(void)
+
+    while (1) {
+        L_u16LdrVal = u16 MADC_u16ReadAnaloge(0);;
+
+        // Threshold matching ambient light levels
+        if (L_u16LdrVal < 300) {
+            // Dark room: Turn all LEDs on
+            PORTC = 0xFF;
+        }
+        else if (L_u16LdrVal >= 300 && L_u16LdrVal < 700) {
+            // Dim room: Turn half of the LEDs on
+            PORTC = 0x0F;
+        }
+        else {
+            // Bright room: Turn all LEDs off
+            PORTC = 0x00;
+        }
+
+        _delay_ms(100);
+    }
+}

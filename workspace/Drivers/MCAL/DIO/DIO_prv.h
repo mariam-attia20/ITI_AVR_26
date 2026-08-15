@@ -10,7 +10,7 @@
 
 
 //PORT
-//we use volatile to disable the optimiser to save value as a defult
+//we use volatile to disable the optimiser to save value as a default
 #define PORTA   *((volatile  u8 *)(0x3B)) //Dereference for the value in this address
                                 // we get this address from data sheet
 #define PORTB   *((volatile  u8 *)(0x38))

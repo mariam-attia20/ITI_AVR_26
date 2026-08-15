@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;Drivers/APP/lab.c&apos; to &apos;deep_switch.c&apos;" description="Rename resource &apos;lab.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="APP/lab.c" name="deep_switch.c" stamp="1785133366575" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;Drivers/MCAL/EXTI/EXTI.h&apos; to &apos;EXTI_prv.h&apos;" description="Rename resource &apos;EXTI.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="MCAL/EXTI/EXTI.h" name="EXTI_prv.h" stamp="1785326228793" updateReferences="true"/>
+</session>

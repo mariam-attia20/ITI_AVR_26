@@ -1,0 +1,18 @@
+/*
+ * uart.h
+ *
+ *  Created on: 7 Aug 2026
+ *      Author: LOQ
+ */
+
+#ifndef DRIVERS_UART_UART_INT_H_
+#define DRIVERS_UART_UART_INT_H_
+
+void MUART_vInit(u32 A_baud);
+void MUART_vSendByte(u32 A_data);
+u32 MUART_u32Receive_byte(void);
+void MUART_vSend_string(const char *str);
+
+
+
+#endif /* DRIVERS_UART_UART_INT_H_ */

@@ -1,0 +1,13 @@
+/*
+ * uart.h
+ *
+ *  Created on: 7 Aug 2026
+ *      Author: LOQ
+ */
+
+#ifndef DRIVERS_UART_UART_H_
+#define DRIVERS_UART_UART_H_
+
+
+
+#endif /* DRIVERS_UART_UART_H_ */

@@ -1,38 +1,20 @@
-14:35:43 **** Incremental Build of configuration Debug for project Drivers ****
+13:14:36 **** Incremental Build of configuration Debug for project Drivers ****
 make all 
-Building file: ../MCAL/DIO/DIO_prg.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"MCAL/DIO/DIO_prg.d" -MT"MCAL/DIO/DIO_prg.o" -c -o "MCAL/DIO/DIO_prg.o" "../MCAL/DIO/DIO_prg.c"
-Finished building: ../MCAL/DIO/DIO_prg.c
- 
-Building target: Drivers.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,Drivers.map -mmcu=atmega16 -o "Drivers.elf"  ./MCAL/DIO/DIO_prg.o  ./HAL/LCD/LCD_prg.o  ./APP/lab.o ./APP/main.o   
-Finished building target: Drivers.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S Drivers.elf  >"Drivers.lss"
-Finished building: Drivers.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex Drivers.elf  "Drivers.hex"
-Finished building: Drivers.hex
- 
 Invoking: Print Size
-avr-size --format=avr --mcu=atmega16 Drivers.elf
+avr-size --format=avr --mcu=atmega32 Drivers.elf
 AVR Memory Usage
 ----------------
-Device: atmega16
+Device: atmega32
 
-Program:    8458 bytes (51.6% Full)
+Program:   25686 bytes (78.4% Full)
 (.text + .data + .bootloader)
 
-Data:          8 bytes (0.8% Full)
+Data:       1307 bytes (63.8% Full)
 (.data + .bss + .noinit)
 
 
 Finished building: sizedummy
  
 
-14:35:43 Build Finished (took 654ms)
+13:14:36 Build Finished (took 362ms)
 

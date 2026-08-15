@@ -1,0 +1,46 @@
+///*
+// * keypad.c
+
+// *
+// *  Created on: 27 Jul 2026
+// *      Author: LOQ
+// */
+//#include "../LIB/STD_TYPES.h"
+//#include "../MCAL/DIO/DIO_int.h"
+//#include "../HAL/LCD/LCD_int.h"
+//#include <util/delay.h>
+//
+//#define colno 4
+//#define rowno 8
+//u8 keypad[4][4]={
+//		{'1' , '2' , '3' , '4'},
+//		{'5' , '5' , '6' , '9'},
+//		{'1' , '2' , '3 ', '4'},
+//		{'1' , '2' , '3' , '4'}
+//};
+//
+//int main(){
+//	//rows - cols
+//	MDIO_vSetPortDir(DIO_PORTA , 0x0F);
+//    MDIO_vSetPortVal(DIO_PORTA , 0xff);
+//    HLCD_vInit();
+//	for(u8 col = 0 ; col < colno ; col++){
+//		MDIO_vSetPinVal(DIO_PORTA , col , DIO_LOW); // activate current colon
+//		for(u8 row = 4 ; row < rowno ; row++){
+//			if(MDIO_u8GetPinVal(DIO_PORTA , row) == 0){
+//				_delay_ms(10);
+//				while(MDIO_u8GetPinVal(DIO_PORTB ,DIO_PIN1) == 0){}
+//				_delay_ms(10);
+//				MDIO_vTogPinVal(DIO_PORTB ,DIO_PIN0 );
+//				u8 pressedvalue = keypad[row-colno][col];
+//				HLCD_vSendChar(pressedvalue) ;
+//			}
+//		}
+//		MDIO_vSetPinVal(DIO_PORTA , col , DIO_HIGH);
+//	}
+//
+//
+//	return 0 ;
+//}
+//
+//

@@ -1,0 +1,35 @@
+
+#include "../LIB/STD_TYPES.h"
+#include "../LIB/BIT_MATH.h"
+#include "../MCAL/TIMER/TIMER_int.h"
+#include "../MCAL/DIO/DIO_int.h"
+#include "../MCAL/ADC/ADC_int.h"
+
+//void SET (void){
+//	MDIO_vSetPinDir( DIO_PORTA , DIO_PIN1 , DIO_OUTPUT);
+//	MDIO_vSetPinVal(DIO_PORTA , DIO_PIN1 , DIO_HIGH);
+//}
+int main(void){
+
+	u16 ADC_Val ;
+	u8 OCD_Val;
+   //led pin
+	MADC_init();
+	MDIO_vInit();
+	MTIMERS_vInit();
+	MDIO_vSetPinDir( DIO_PORTB , DIO_PIN3 , DIO_OUTPUT);
+	MTIMERS_vStartTimer(TIM_0);
+	while(1)
+	{
+		ADC_Val = MADC_u16ReadAnaloge(CHANEL_0) ;
+		OCD_Val = ADC_Val /4; //mapping
+		MTIMERS_vSetCompareMatch(TIM_0 , OCD_Val );
+
+	}
+
+
+
+	return 0 ;
+}
+
+

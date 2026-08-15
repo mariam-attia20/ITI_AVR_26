@@ -1,0 +1,1 @@
+APP/SPI.o APP/SPI.o: ../APP/SPI.c

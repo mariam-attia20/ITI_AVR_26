@@ -1,0 +1,30 @@
+/*
+ * TIMER_int.h
+ *
+ *  Created on: 3 Aug 2026
+ *      Author: LOQ
+ */
+
+#ifndef MCAL_TIMER_TIMER_INT_H_
+#define MCAL_TIMER_TIMER_INT_H_
+
+#define TIM_0  0
+
+void MTIMER_vInit(void);
+void MTIMER_vStartTimer(u8 A_u8TimerID);
+void MTIMER_vStopTimer(u8 A_u8TimerID);
+
+void MTIMER_vEnableInterrupt(u8 A_u8TimerID , u8 A_u8TimerMode);
+void MTIMER_vDisableInterrupt(u8 A_u8TimerID , u8 A_u8TimerMode);
+//OVF
+void MTIMER_vSetPreloadVale( u8 A_u8TimerID , u16 A_u16Preload );
+//callback functions
+void MTIMER_vSetInterval_OVF(void (*Fptr)(void) , u32 A_u32IntervalCount);
+
+//CTC
+void MTIMER_vSetCompareMatch( u8 A_u8TimerID , u16 A_u16OCR_val);
+void MTIMER_vSetInterval_CTC(void (*Fptr)(void) , u32 A_u32IntervalCount);
+
+
+
+#endif /* MCAL_TIMER_TIMER_INT_H_ */

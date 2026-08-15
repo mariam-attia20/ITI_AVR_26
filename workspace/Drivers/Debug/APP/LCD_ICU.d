@@ -1,0 +1,1 @@
+APP/LCD_ICU.o APP/LCD_ICU.o: ../APP/LCD_ICU.c

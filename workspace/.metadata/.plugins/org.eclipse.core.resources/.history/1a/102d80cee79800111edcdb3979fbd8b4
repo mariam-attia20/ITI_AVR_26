@@ -1,0 +1,29 @@
+/*
+ * spi_assig.c
+ *
+ *  Created on: 15 Aug 2026
+ *      Author: LOQ
+ */
+
+#include "../LIB/STD_TYPES.h"
+#include "../MCAL/DIO/DIO_int.h"
+#include "../MCAL/SPI/SPI_int.h"
+
+int main()
+{
+	MDIO_vSetPinDir(DIO_PORTA , DIO_PIN0 , DIO_OUTPUT);
+	MDIO_vSetPinDir(DIO_PORTA , DIO_PIN1 , DIO_OUTPUT);
+
+	u8 	Temp = 0 ;
+	MSPI_vInit();
+	Temp = MSPI_u8Receive();
+
+	if(Temp > 26){
+		MDIO_vSetPinVal(DIO_PORTA , DIO_PIN0 , DIO_HIGH);
+		MDIO_vSetPinVal(DIO_PORTA , DIO_PIN1 , DIO_LOW);
+	}
+
+	while(1)
+	{
+	}
+}

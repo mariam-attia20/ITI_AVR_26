@@ -5,9 +5,9 @@
  *      Author: LOQ
  */
 
-#include "../LIB/STD_TYPES.h"
-#include "../MCAL/DIO/DIO_int.h"
-#include "../HAL/LCD/LCD_int.h"
+//#include "../LIB/STD_TYPES.h"
+//#include "../MCAL/DIO/DIO_int.h"
+//#include "../HAL/LCD/LCD_int.h"
 
 
 //int main()

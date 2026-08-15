@@ -1,0 +1,44 @@
+/*
+ * SPI_prg.c
+ *
+ *  Created on: 6 Aug 2026
+ *      Author: LOQ
+ */
+
+#include "../../LIB/STD_TYPES.h"
+#include "../../MCAL/DIO/DIO_int.h"
+#include "../../LIB/BIT_MATH.h"
+
+#include "SPI_int.h"
+#include "SPI_prv.h"
+#include "SPI_cfg.h"
+
+
+void MSPI_vInit(void)
+{
+#if SPI_MODE == SPI_MASTER
+
+	MDIO_vSetPinDir(DIO_PORTB , DIO_PIN5 , DIO_OUTPUT);//MOSI
+	MDIO_vSetPinDir(DIO_PORTB , DIO_PIN6 , DIO_INPUT); //MISO
+	MDIO_vSetPinDir(DIO_PORTB , DIO_PIN7 , DIO_OUTPUT); //SCK
+	MDIO_vSetPinDir(DIO_PORTB , DIO_PIN4 , DIO_OUTPUT); //SS
+
+	MDIO_vSetPinVir(DIO_PORTB , DIO_PIN6 , DIO_HIGH);
+
+	SPCR = 0b01011010;
+
+}
+
+void MSPI_vTransmit(u8 A_u8Byte){
+
+}
+
+u8 MSPI_u8Transmit(void){
+
+}
+
+u8 MSPI_u8Trnsceive(u8 A_u8Byte){
+
+}
+
+

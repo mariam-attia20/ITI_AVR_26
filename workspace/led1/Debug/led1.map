@@ -112,7 +112,7 @@ LOAD c:/users/loq/desktop/iti/imt_sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gc
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000       0x8a
+.text           0x00000000       0x70
  *(.vectors)
  .vectors       0x00000000       0x54 c:/users/loq/desktop/iti/imt_sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
                 0x00000000                __vectors
@@ -189,14 +189,12 @@ LOAD c:/users/loq/desktop/iti/imt_sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gc
  .text          0x0000006c        0x0 c:/users/loq/desktop/iti/imt_sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
                 0x0000006c                . = ALIGN (0x2)
  *(.text.*)
- .text.main     0x0000006c       0x1a ./main.o
-                0x0000006c                main
- .text.libgcc   0x00000086        0x0 c:/users/loq/desktop/iti/imt_sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
-                0x00000086                . = ALIGN (0x2)
+ .text.libgcc   0x0000006c        0x0 c:/users/loq/desktop/iti/imt_sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+                0x0000006c                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000086        0x0 c:/users/loq/desktop/iti/imt_sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
-                0x00000086                exit
-                0x00000086                _exit
+ .fini9         0x0000006c        0x0 c:/users/loq/desktop/iti/imt_sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+                0x0000006c                exit
+                0x0000006c                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -215,11 +213,11 @@ LOAD c:/users/loq/desktop/iti/imt_sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gc
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000086        0x4 c:/users/loq/desktop/iti/imt_sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .fini0         0x0000006c        0x4 c:/users/loq/desktop/iti/imt_sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x0000008a                _etext = .
+                0x00000070                _etext = .
 
-.data           0x00800060        0x0 load address 0x0000008a
+.data           0x00800060        0x0 load address 0x00000070
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800060        0x0 c:/users/loq/desktop/iti/imt_sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
@@ -242,8 +240,8 @@ LOAD c:/users/loq/desktop/iti/imt_sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gc
  *(.bss*)
  *(COMMON)
                 0x00800060                PROVIDE (__bss_end, .)
-                0x0000008a                __data_load_start = LOADADDR (.data)
-                0x0000008a                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00000070                __data_load_start = LOADADDR (.data)
+                0x00000070                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800060        0x0
                 0x00800060                PROVIDE (__noinit_start, .)
@@ -268,13 +266,13 @@ LOAD c:/users/loq/desktop/iti/imt_sdk_win_64/imt_sdk_win_64/winavr/bin/../lib/gc
 .signature
  *(.signature*)
 
-.stab           0x00000000      0x300
+.stab           0x00000000       0xe4
  *(.stab)
- .stab          0x00000000      0x300 ./main.o
+ .stab          0x00000000       0xe4 ./main.o
 
-.stabstr        0x00000000      0x753
+.stabstr        0x00000000      0x225
  *(.stabstr)
- .stabstr       0x00000000      0x753 ./main.o
+ .stabstr       0x00000000      0x225 ./main.o
 
 .stab.excl
  *(.stab.excl)

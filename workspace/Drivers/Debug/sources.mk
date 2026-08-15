@@ -21,6 +21,19 @@ C_DEPS :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 APP \
+FreeRTOS \
+HAL/KPD \
 HAL/LCD \
+HAL/SSD \
+HAL/STEPPER \
+MCAL/ADC \
 MCAL/DIO \
+MCAL/EXTI \
+MCAL/GIE \
+MCAL/SPI \
+MCAL/TIMER \
+MCAL/TWI \
+MCAL/UART \
+MCAL/WDT \
+RTOS \
 

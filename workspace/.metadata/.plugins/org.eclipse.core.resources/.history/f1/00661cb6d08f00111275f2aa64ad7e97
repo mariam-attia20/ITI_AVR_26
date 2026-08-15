@@ -1,0 +1,200 @@
+/*
+
+ *
+ *  Created on: 3 Aug 2026
+ *      Author: LOQ
+ */
+#include "../../LIB/STD_TYPES.h"
+#include "../../LIB/BIT_MATH.h"
+
+#include "TIMER_int.h"
+#include "TIMER_prv.h"
+#include "TIMER_cfg.h"
+
+
+static void (*G_TIMER_OVF_CB)(void) = {NULL};
+static void (*G_TIMER_CTC_CB)(void) = {NULL};
+
+static u8 G_u8Timer0Preload = 0;
+static u32 G_u32IntervalCount = 0 ;
+
+void MTIMER_vInit(void)
+{
+#if TIMER0_STATE ==ENABLE
+
+#if TIMER0_MODE == NORMAL_OVERFLOW
+	CLR_BIT(TCCR0 , WGM01);
+	CLR_BIT(TCCR0 , WGM00);
+
+#elif TIMER0_MODE == CTC
+	SET_BIT(TCCR0 , WGM01);
+	CLR_BIT(TCCR0 , WGM00);
+
+#elif TIMER0_MODE == PWM_PHASE_CORRECT
+	SET_BIT(TCCR0 , WGM00);
+	CLR_BIT(TCCR0 , WGM01);
+#if PWM_OUTPUT_MODE == NON_INVERTING
+	SET_BIT(TCCR0 , COM01);
+	CLR_BIT(TCCR0 , COM00);
+#elif PWM_OUTPUT_MODE == INVERTING
+	SET_BIT(TCCR0 , COM00);
+	SET_BIT(TCCR0 , COM01);
+#elif PWM_OUTPUT_MODE == DISCONNECTED
+	CLR_BIT(TCCR0 , COM00);
+	CLR_BIT(TCCR0 , COM01);
+#endif
+
+
+#elif TIMER0_MODE == FAST_PWM
+	SET_BIT(TCCR0 , WGM01);
+	SET_BIT(TCCR0 , WGM00);
+#if PWM_OUTPUT_MODE == NON_INVERTING
+	SET_BIT(TCCR0 , COM01);
+	CLR_BIT(TCCR0 , COM00);
+#elif PWM_OUTPUT_MODE == INVERTING
+	SET_BIT(TCCR0 , COM00);
+	SET_BIT(TCCR0 , COM01);
+#elif PWM_OUTPUT_MODE == DISCONNECTED
+	CLR_BIT(TCCR0 , COM00);
+	CLR_BIT(TCCR0 , COM01);
+#endif
+
+#endif
+
+#if INTERRUPT_CONTROL ==ENABLE
+	MTIMER_vEnableInterrupt(TIM_0 , TIMER0_MODE);
+#elif INTERRUPT_CONTROL ==DISABLE
+	MTIMER_vDisableInterrupt(TIM_0 , TIMER0_MODE);
+#endif
+	//stop timer0
+	CLR_BIT(TCCR0 , CS00);
+	CLR_BIT(TCCR0 , CS01);
+	CLR_BIT(TCCR0 , CS02);
+
+#endif
+
+}
+
+void MTIMER_vStartTimer(u8 A_u8TimerID)
+{
+	if (A_u8TimerID == TIM_0)
+	{
+		TCCR0 = (TCCR0 & 0xF8)| (0x07 & CLK_SELECT_PRESCALER_TIM0 );
+	}
+}
+void MTIMER_vStopTimer(u8 A_u8TimerID)
+{
+	if (A_u8TimerID == TIM_0)
+	{
+		TCCR0 = (TCCR0 & 0xF8)| (0x07 & 0x00 );
+	}
+}
+
+void MTIMER_vEnableInterrupt(u8 A_u8TimerID , u8 A_u8TimerMode)
+{
+	if(A_u8TimerID == TIM_0)
+	{
+		switch(A_u8TimerMode)
+		{
+		case NORMAL_OVERFLOW:
+			SET_BIT(TIMSK , 0);
+			break;
+		case CTC :
+			SET_BIT(TIMSK , 1);
+		    break;
+
+		}
+	}
+
+}
+void MTIMER_vDisableInterrupt(u8 A_u8TimerID , u8 A_u8TimerMode)
+{
+	if( A_u8TimerID == TIM_0)
+		{
+			switch(A_u8TimerMode)
+			{
+			case NORMAL_OVERFLOW:
+				CLR_BIT(TIMSK , 0);
+				break;
+			case CTC :
+				CLR_BIT(TIMSK , 1);
+			    break;
+
+			}
+		}
+
+}
+
+void MTIMER_vSetPreloadVale( u8 A_u8TimerID , u16 A_u16Preload )
+{
+	switch(A_u8TimerID)
+	{
+	case TIM_0:
+		TCNT0 = (u8) A_u16Preload ;
+		break ;
+
+	}
+
+}
+
+void MTIMER_vSetCompareMatch( u8 A_u8TimerID , u16 A_u16OCR_val)
+{
+	switch(A_u8TimerID)
+		{
+		case TIM_0:
+			OCR0 = (u8)A_u16OCR_val ;
+			break ;
+
+		}
+
+}
+
+void MTIMER_vSetInterval_OVF(void (*Fptr)(void) , u32 A_u32IntervalCount)
+{
+	A_u32IntervalCount = G_u32IntervalCount ;
+	G_TIMER_OVF_CB = Fptr ;
+}
+
+void MTIMER_vSetInterval_CTC(void (*Fptr)(void) , u32 A_u32IntervalCount)
+{
+	A_u32IntervalCount = G_u32IntervalCount ;
+	G_TIMER_CTC_CB = Fptr ;
+
+}
+
+//ovf isr
+void __vector_11(void) __attribute__((signal));
+void __vector_11(void)
+{
+	static u32 LS_u32t_ovf = 0 ;
+
+	 LS_u32t_ovf++;
+	if(LS_u32t_ovf == G_u32IntervalCount)
+	{
+		TCNT0 = G_u8Timer0Preload ;
+		if(G_TIMER_OVF_CB != NULL)
+		{
+			G_TIMER_OVF_CB();
+			LS_u32t_ovf =0 ;
+	}
+	}
+}
+//ctc
+void __vector_10(void) __attribute__((signal));
+void __vector_10(void)
+{
+	static u32 LS_u32t_counter = 0 ;
+
+		 LS_u32t_counter++;
+		if(LS_u32t_counter == G_u32IntervalCount)
+		{
+			TCNT0 = G_u8Timer0Preload ;
+			if(G_TIMER_CTC_CB != NULL)
+			{
+				G_TIMER_CTC_CB();
+				LS_u32t_counter =0 ;
+		}
+		}
+
+}
+

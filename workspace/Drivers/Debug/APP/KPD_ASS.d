@@ -1,0 +1,1 @@
+APP/KPD_ASS.o APP/KPD_ASS.o: ../APP/KPD_ASS.c

@@ -1,0 +1,38 @@
+///*
+// * lab.c
+// *
+// *  Created on: 26 Jul 2026
+// *      Author: LOQ
+// */
+//#include "../LIB/STD_TYPES.h"
+//#include "../MCAL/DIO/DIO_int.h"
+//#include <util/delay.h>
+//
+//int main()
+//{
+//    //deep switch pin
+//	MDIO_vSetPortDir(DIO_PORTD, DIO_INPUT);
+//    MDIO_vSetPortVal(DIO_PORTD , DIO_HIGH);
+//	//led pins
+//    MDIO_vSetPortDir(DIO_PORTA , DIO_OUTPUT);
+//
+//    while(1)
+//    {
+//      u8 L_u8SwitchState = MDIO_u8GetPortVal(DIO_PORTD);
+//      for(u8 i = 0; i < 8; i++)
+//       {
+//		 if(MDIO_u8GetPinVal(DIO_PORTD, i) == DIO_LOW)
+//          {
+//              MDIO_vSetPinVal(DIO_PORTA, i, DIO_HIGH);
+//           }
+//           else // Switch is OFF
+//		   {
+//			 MDIO_vSetPinVal(DIO_PORTA, i, DIO_LOW);
+//           }
+//		 }
+//
+//    }
+//
+//   return 0;
+//}
+//

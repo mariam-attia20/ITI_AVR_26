@@ -1,0 +1,30 @@
+/*
+ * TWI_int.h
+ *
+ *  Created on: 8 Aug 2026
+ *      Author: LOQ
+ */
+
+#ifndef MCAL_TWI_TWI_INT_H_
+#define MCAL_TWI_TWI_INT_H_
+
+void MTWI_vInit(void);
+
+u8 MTWI_u8SendStartCondition(void);
+
+u8 MTWI_u8ReSendStartCondition(void);
+
+u8 MTWI_u8SendEndCondition(void);
+
+u8 MTWI_u8SendSLA_RW(u8 A_u8SLA , u8 A_u8RW);
+
+u8 MTWI_u8SendByte(u8 A_u8Byte);
+
+u8 MTWI_u8RecevieByte(u8* A_u8Byte , u8 A_u8Ack_NAck);
+
+u8  MTWI_u8GetStatusCode(u8 A_stateval);
+
+
+
+
+#endif /* MCAL_TWI_TWI_INT_H_ */

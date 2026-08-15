@@ -1,0 +1,37 @@
+
+#include "../LIB/STD_TYPES.h"
+#include "../LIB/BIT_MATH.h"
+#include "../MCAL/TIMER/TIMER_int.h"
+#include "../MCAL/DIO/DIO_int.h"
+#include "../MCAL/GIE/GIE_int.h"
+#include "../MCAL/ADC/ADC_int.h"
+
+void toggle (void){
+	MDIO_vTogPinVal(DIO_PORTA , DIO_PIN1);
+}
+int main(void){
+//buzzer pin
+	MDIO_vSetPinDir( DIO_PORTA , DIO_PIN1 , DIO_OUTPUT);
+
+	MADC_init();
+	MTIMERS_vInit();
+	MGIE_vEnableGlobalInterrupt();
+
+
+	MTIMERS_vSetInterval_CTC( toggle , 10000);
+	MTIMERS_vSetCompareMatch(TIM_0 , 100);
+	MTIMERS_vStartTimer(TIM_0);
+	u8 ADC_Val ;
+
+
+	while(1){
+		ADC_Val = MADC_u16ReadAnaloge(CHANEL_0) ;
+		u8 OCD_Val = 20 + ((ADC_Val * 230) /1023) ; //mapping
+		MTIMERS_vSetCompareMatch(TIM_0 , OCD_Val );
+
+	}
+
+
+
+	return 0 ;
+}

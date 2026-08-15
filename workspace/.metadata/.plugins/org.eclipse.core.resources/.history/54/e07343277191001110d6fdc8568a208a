@@ -1,0 +1,11 @@
+/*
+ * UART_LAD.c
+ *
+ *  Created on: 6 Aug 2026
+ *      Author: LOQ
+ */
+#include "../LIB/STD_TYPES.h"
+#include "../MCAL/DIO/DIO_int.h"
+
+
+

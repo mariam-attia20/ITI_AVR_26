@@ -1,0 +1,27 @@
+/*
+ * SPI.c
+ *
+ *  Created on: 8 Aug 2026
+ *      Author: LOQ
+ */
+
+
+#include "../LIB/STD_TYPES.h"
+#include "../MCAL/DIO/DIO_int.h"
+#include "../MCAL/SPI/SPI_int.h"
+
+int main()
+{
+	u8 ch = 0 ;
+	MSPI_vInit();
+
+	ch = MSPI_u8Trnsceive('H');
+
+	if(ch == 'H'){
+		MDIO_vSetPinVal(DIO_PORTA , DIO_PIN0 , DIO_HIGH);
+	}
+
+	while(1)
+	{
+	}
+}
